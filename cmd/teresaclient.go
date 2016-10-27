@@ -13,6 +13,7 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 	apiclient "github.com/luizalabs/teresa-api/client"
+	"github.com/luizalabs/teresa-api/client/apps"
 	"github.com/luizalabs/teresa-api/client/auth"
 	"github.com/luizalabs/teresa-api/client/teams"
 	"github.com/luizalabs/teresa-api/client/users"
@@ -129,14 +130,13 @@ func (tc TeresaClient) CreateApp(name string, scale int64, teamID int64) (app *m
 }
 
 // GetApps return apps for a specific team
-func (tc TeresaClient) GetApps(teamID int64) (app []*models.App, err error) {
-	// params := apps.NewGetAppsParams().WithTeamID(teamID)
-	// r, err := tc.teresa.Apps.GetApps(params, tc.apiKeyAuthFunc)
-	// if err != nil {
-	// 	return nil, err
-	// }
-	// return r.Payload.Items, nil
-	return
+func (tc TeresaClient) GetApps() (app []*models.App, err error) {
+	p := apps.NewGetAppsParams()
+	r, err := tc.teresa.Apps.GetApps(p, tc.apiKeyAuthFunc)
+	if err != nil {
+		return nil, err
+	}
+	return r.Payload, nil
 }
 
 // GetAppDetail Create app attributes
