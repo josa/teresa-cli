@@ -434,103 +434,103 @@
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client",
-			"Comment": "v0.1.1-67-gf2ffabf",
-			"Rev": "f2ffabf475c2eccb60d75f84e8b81a663b538d09"
+			"Comment": "v0.1.1-67-ga76a11f",
+			"Rev": "a76a11f3fbd539ffc163baa9ee6655dd1d5bf685"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client/apps",
-			"Comment": "v0.1.1-67-gf2ffabf",
-			"Rev": "f2ffabf475c2eccb60d75f84e8b81a663b538d09"
+			"Comment": "v0.1.1-67-ga76a11f",
+			"Rev": "a76a11f3fbd539ffc163baa9ee6655dd1d5bf685"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client/auth",
-			"Comment": "v0.1.1-67-gf2ffabf",
-			"Rev": "f2ffabf475c2eccb60d75f84e8b81a663b538d09"
+			"Comment": "v0.1.1-67-ga76a11f",
+			"Rev": "a76a11f3fbd539ffc163baa9ee6655dd1d5bf685"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client/deployments",
-			"Comment": "v0.1.1-67-gf2ffabf",
-			"Rev": "f2ffabf475c2eccb60d75f84e8b81a663b538d09"
+			"Comment": "v0.1.1-67-ga76a11f",
+			"Rev": "a76a11f3fbd539ffc163baa9ee6655dd1d5bf685"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client/teams",
-			"Comment": "v0.1.1-67-gf2ffabf",
-			"Rev": "f2ffabf475c2eccb60d75f84e8b81a663b538d09"
+			"Comment": "v0.1.1-67-ga76a11f",
+			"Rev": "a76a11f3fbd539ffc163baa9ee6655dd1d5bf685"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client/users",
-			"Comment": "v0.1.1-67-gf2ffabf",
-			"Rev": "f2ffabf475c2eccb60d75f84e8b81a663b538d09"
+			"Comment": "v0.1.1-67-ga76a11f",
+			"Rev": "a76a11f3fbd539ffc163baa9ee6655dd1d5bf685"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/cmd/teresa-server",
-			"Comment": "v0.1.1-67-gf2ffabf",
-			"Rev": "f2ffabf475c2eccb60d75f84e8b81a663b538d09"
+			"Comment": "v0.1.1-67-ga76a11f",
+			"Rev": "a76a11f3fbd539ffc163baa9ee6655dd1d5bf685"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/docs",
-			"Comment": "v0.1.1-67-gf2ffabf",
-			"Rev": "f2ffabf475c2eccb60d75f84e8b81a663b538d09"
+			"Comment": "v0.1.1-67-ga76a11f",
+			"Rev": "a76a11f3fbd539ffc163baa9ee6655dd1d5bf685"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/handlers",
-			"Comment": "v0.1.1-67-gf2ffabf",
-			"Rev": "f2ffabf475c2eccb60d75f84e8b81a663b538d09"
+			"Comment": "v0.1.1-67-ga76a11f",
+			"Rev": "a76a11f3fbd539ffc163baa9ee6655dd1d5bf685"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/helpers",
-			"Comment": "v0.1.1-67-gf2ffabf",
-			"Rev": "f2ffabf475c2eccb60d75f84e8b81a663b538d09"
+			"Comment": "v0.1.1-67-ga76a11f",
+			"Rev": "a76a11f3fbd539ffc163baa9ee6655dd1d5bf685"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/k8s",
-			"Comment": "v0.1.1-67-gf2ffabf",
-			"Rev": "f2ffabf475c2eccb60d75f84e8b81a663b538d09"
+			"Comment": "v0.1.1-67-ga76a11f",
+			"Rev": "a76a11f3fbd539ffc163baa9ee6655dd1d5bf685"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/models",
-			"Comment": "v0.1.1-67-gf2ffabf",
-			"Rev": "f2ffabf475c2eccb60d75f84e8b81a663b538d09"
+			"Comment": "v0.1.1-67-ga76a11f",
+			"Rev": "a76a11f3fbd539ffc163baa9ee6655dd1d5bf685"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/models/storage",
-			"Comment": "v0.1.1-67-gf2ffabf",
-			"Rev": "f2ffabf475c2eccb60d75f84e8b81a663b538d09"
+			"Comment": "v0.1.1-67-ga76a11f",
+			"Rev": "a76a11f3fbd539ffc163baa9ee6655dd1d5bf685"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/restapi",
-			"Comment": "v0.1.1-67-gf2ffabf",
-			"Rev": "f2ffabf475c2eccb60d75f84e8b81a663b538d09"
+			"Comment": "v0.1.1-67-ga76a11f",
+			"Rev": "a76a11f3fbd539ffc163baa9ee6655dd1d5bf685"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/restapi/operations",
-			"Comment": "v0.1.1-67-gf2ffabf",
-			"Rev": "f2ffabf475c2eccb60d75f84e8b81a663b538d09"
+			"Comment": "v0.1.1-67-ga76a11f",
+			"Rev": "a76a11f3fbd539ffc163baa9ee6655dd1d5bf685"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/restapi/operations/apps",
-			"Comment": "v0.1.1-67-gf2ffabf",
-			"Rev": "f2ffabf475c2eccb60d75f84e8b81a663b538d09"
+			"Comment": "v0.1.1-67-ga76a11f",
+			"Rev": "a76a11f3fbd539ffc163baa9ee6655dd1d5bf685"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/restapi/operations/auth",
-			"Comment": "v0.1.1-67-gf2ffabf",
-			"Rev": "f2ffabf475c2eccb60d75f84e8b81a663b538d09"
+			"Comment": "v0.1.1-67-ga76a11f",
+			"Rev": "a76a11f3fbd539ffc163baa9ee6655dd1d5bf685"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/restapi/operations/deployments",
-			"Comment": "v0.1.1-67-gf2ffabf",
-			"Rev": "f2ffabf475c2eccb60d75f84e8b81a663b538d09"
+			"Comment": "v0.1.1-67-ga76a11f",
+			"Rev": "a76a11f3fbd539ffc163baa9ee6655dd1d5bf685"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/restapi/operations/teams",
-			"Comment": "v0.1.1-67-gf2ffabf",
-			"Rev": "f2ffabf475c2eccb60d75f84e8b81a663b538d09"
+			"Comment": "v0.1.1-67-ga76a11f",
+			"Rev": "a76a11f3fbd539ffc163baa9ee6655dd1d5bf685"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/restapi/operations/users",
-			"Comment": "v0.1.1-67-gf2ffabf",
-			"Rev": "f2ffabf475c2eccb60d75f84e8b81a663b538d09"
+			"Comment": "v0.1.1-67-ga76a11f",
+			"Rev": "a76a11f3fbd539ffc163baa9ee6655dd1d5bf685"
 		},
 		{
 			"ImportPath": "github.com/magiconair/properties",
