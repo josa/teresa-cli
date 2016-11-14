@@ -7,4 +7,4 @@ COPY . /go/src/github.com/luizalabs/teresa-cli
 RUN go get github.com/tools/godep
 RUN godep go install .
 
-CMD ["tcli"]
+CMD ["teresa"]
