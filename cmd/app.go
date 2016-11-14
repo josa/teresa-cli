@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/fatih/color"
-	"github.com/luizalabs/tapi/models"
+	"github.com/luizalabs/teresa-api/models"
 	"github.com/olekukonko/tablewriter"
 	"github.com/spf13/cobra"
 )
