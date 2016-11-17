@@ -183,7 +183,9 @@ var appInfoCmd = &cobra.Command{
 				fmt.Printf("  %s=%s\n", *e.Key, *e.Value)
 			}
 		}
-		fmt.Println(bold("scale:"), app.Scale)
+		fmt.Println(bold("status:"))
+		fmt.Printf("  %s %d%%\n", bold("cpu:"), *app.Status.CPU)
+		fmt.Printf("  %s %d\n", bold("pods:"), *app.Status.Pods)
 		fmt.Println(bold("autoscale:"))
 		fmt.Printf("  %s %d%%\n", bold("cpu:"), *app.AutoScale.CPUTargetUtilization)
 		fmt.Printf("  %s %d\n", bold("max:"), app.AutoScale.Max)

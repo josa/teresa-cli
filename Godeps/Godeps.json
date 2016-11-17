@@ -163,8 +163,7 @@
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/models",
-			"Comment": "v0.1.1-75-g59d29da",
-			"Rev": "59d29da1559f01ec639869d987bb6011d80998f7"
+			"Rev": "5a95dc97bfcba8782c636837dec6ff3a60347bad"
 		},
 		{
 			"ImportPath": "github.com/magiconair/properties",
