@@ -133,38 +133,38 @@
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client",
-			"Comment": "v0.1.1-77-g68b6a31",
-			"Rev": "68b6a3184c1e3b0cae9cbc2a942cb1bb097d4060"
+			"Comment": "v0.1.1-86-g108b2c3",
+			"Rev": "108b2c37612f59ed2d834f35c414017b583afb91"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client/apps",
-			"Comment": "v0.1.1-77-g68b6a31",
-			"Rev": "68b6a3184c1e3b0cae9cbc2a942cb1bb097d4060"
+			"Comment": "v0.1.1-86-g108b2c3",
+			"Rev": "108b2c37612f59ed2d834f35c414017b583afb91"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client/auth",
-			"Comment": "v0.1.1-77-g68b6a31",
-			"Rev": "68b6a3184c1e3b0cae9cbc2a942cb1bb097d4060"
+			"Comment": "v0.1.1-86-g108b2c3",
+			"Rev": "108b2c37612f59ed2d834f35c414017b583afb91"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client/deployments",
-			"Comment": "v0.1.1-77-g68b6a31",
-			"Rev": "68b6a3184c1e3b0cae9cbc2a942cb1bb097d4060"
+			"Comment": "v0.1.1-86-g108b2c3",
+			"Rev": "108b2c37612f59ed2d834f35c414017b583afb91"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client/teams",
-			"Comment": "v0.1.1-77-g68b6a31",
-			"Rev": "68b6a3184c1e3b0cae9cbc2a942cb1bb097d4060"
+			"Comment": "v0.1.1-86-g108b2c3",
+			"Rev": "108b2c37612f59ed2d834f35c414017b583afb91"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client/users",
-			"Comment": "v0.1.1-77-g68b6a31",
-			"Rev": "68b6a3184c1e3b0cae9cbc2a942cb1bb097d4060"
+			"Comment": "v0.1.1-86-g108b2c3",
+			"Rev": "108b2c37612f59ed2d834f35c414017b583afb91"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/models",
-			"Comment": "v0.1.1-77-g68b6a31",
-			"Rev": "68b6a3184c1e3b0cae9cbc2a942cb1bb097d4060"
+			"Comment": "v0.1.1-86-g108b2c3",
+			"Rev": "108b2c37612f59ed2d834f35c414017b583afb91"
 		},
 		{
 			"ImportPath": "github.com/magiconair/properties",
