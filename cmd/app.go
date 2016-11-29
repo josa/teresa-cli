@@ -377,6 +377,45 @@ You can also provide more than one env var at a time:
 	},
 }
 
+var appLogsCmd = &cobra.Command{
+	Use:   "logs <name>",
+	Short: "Show app logs",
+	Long: `Show application logs.
+
+WARNING:
+  Lines are collected from all pods.`,
+	Example: `  $ teresa app logs foo
+
+  To change the number of lines:
+
+  $ teresa app logs foo --lines=20
+
+  You can also simulate tail -f:
+
+  $ teresa app logs foo --lines=20 --follow`,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			return newUsageError("You should provide the name of the app in order to continue")
+		}
+		appName := args[0]
+		lines, _ := cmd.Flags().GetInt64("lines")
+		follow, _ := cmd.Flags().GetBool("follow")
+		tc := NewTeresa()
+		_, err := tc.GetAppInfo(appName)
+		if err != nil {
+			if isNotFound(err) {
+				return newCmdError("App not found")
+			}
+			return err
+		}
+		err = tc.GetAppLogs(appName, &lines, &follow, os.Stdout)
+		if err != nil {
+			return err
+		}
+		return nil
+	},
+}
+
 func init() {
 	// add AppCmd
 	RootCmd.AddCommand(appCmd)
@@ -386,6 +425,7 @@ func init() {
 	appCmd.AddCommand(appInfoCmd)
 	appCmd.AddCommand(appEnvSetCmd)
 	appCmd.AddCommand(appEnvUnSetCmd)
+	appCmd.AddCommand(appLogsCmd)
 	// Create App flags
 	appCreateCmd.Flags().String("team", "", "team owner of the app")
 	appCreateCmd.Flags().Int64("scale-min", 1, "auto scale min size")
@@ -399,4 +439,7 @@ func init() {
 	// App unset env vars
 	appEnvUnSetCmd.Flags().String("app", "", "app name")
 	appEnvUnSetCmd.Flags().Bool("no-input", false, "unset env vars without warning")
+	// App logs
+	appLogsCmd.Flags().Int64("lines", 10, "number of lines")
+	appLogsCmd.Flags().Bool("follow", false, "follow logs")
 }

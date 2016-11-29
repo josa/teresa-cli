@@ -147,6 +147,17 @@ func (tc TeresaClient) GetAppInfo(appName string) (app *models.App, err error) {
 	return r.Payload, nil
 }
 
+func (tc TeresaClient) GetAppLogs(appName string, lines *int64, follow *bool, writer io.Writer) error {
+	p := apps.NewGetAppLogsParams().WithAppName(appName)
+	p.Follow = follow
+	p.Lines = lines
+	_, err := tc.teresa.Apps.GetAppLogs(p, tc.apiKeyAuthFunc, writer)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 // GetAppDetail Create app attributes
 func (tc TeresaClient) GetAppDetail(teamID, appID int64) (app *models.App, err error) {
 	// params := apps.NewGetAppDetailsParams().WithTeamID(teamID).WithAppID(appID)
