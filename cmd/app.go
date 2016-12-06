@@ -183,13 +183,23 @@ var appInfoCmd = &cobra.Command{
 				fmt.Printf("  %s=%s\n", *e.Key, *e.Value)
 			}
 		}
-		fmt.Println(bold("status:"))
-		fmt.Printf("  %s %d%%\n", bold("cpu:"), *app.Status.CPU)
-		fmt.Printf("  %s %d\n", bold("pods:"), *app.Status.Pods)
-		fmt.Println(bold("autoscale:"))
-		fmt.Printf("  %s %d%%\n", bold("cpu:"), *app.AutoScale.CPUTargetUtilization)
-		fmt.Printf("  %s %d\n", bold("max:"), app.AutoScale.Max)
-		fmt.Printf("  %s %d\n", bold("min:"), app.AutoScale.Min)
+		if app.Status != nil && (app.Status.CPU != nil || app.Status.Pods != nil) {
+			fmt.Println(bold("status:"))
+			if app.Status.CPU != nil {
+				fmt.Printf("  %s %d%%\n", bold("cpu:"), *app.Status.CPU)
+			}
+			if app.Status.Pods != nil {
+				fmt.Printf("  %s %d\n", bold("pods:"), *app.Status.Pods)
+			}
+		}
+		if app.AutoScale != nil {
+			fmt.Println(bold("autoscale:"))
+			if app.AutoScale.CPUTargetUtilization != nil {
+				fmt.Printf("  %s %d%%\n", bold("cpu:"), *app.AutoScale.CPUTargetUtilization)
+			}
+			fmt.Printf("  %s %d\n", bold("max:"), app.AutoScale.Max)
+			fmt.Printf("  %s %d\n", bold("min:"), app.AutoScale.Min)
+		}
 		fmt.Println(bold("limits:"))
 		if len(app.Limits.Default) > 0 {
 			fmt.Println(bold("  defaults"))
