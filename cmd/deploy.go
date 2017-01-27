@@ -4,15 +4,25 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
+
+	yaml "gopkg.in/yaml.v2"
 
 	"github.com/fatih/color"
 	"github.com/luizalabs/teresa-cli/tar"
 	"github.com/satori/go.uuid"
 	"github.com/spf13/cobra"
 )
+
+type TeresaYaml struct {
+	Hooks *struct {
+		Pre  []string `yaml:"pre,omitempty"`
+		Post []string `yaml:"post,omitempty"`
+	} `yaml:"hooks,omitempty"`
+}
 
 var deployCmd = &cobra.Command{
 	Use:   "deploy <app folder>",
@@ -115,6 +125,12 @@ func createArchive(source, target string) error {
 		return errors.New("Path to create the app archive isn't a directory")
 	}
 
+	hookFiles, err := createHookFiles(source)
+	if err != nil {
+		return fmt.Errorf("Can't process hooks of teresa.yaml file. %s", err)
+	}
+	defer cleanHookFiles(hookFiles)
+
 	ignorePatterns, err := getIgnorePatterns(source)
 	if err != nil {
 		return errors.New("Invalid file '.teresaignore'")
@@ -133,6 +149,7 @@ func createArchive(source, target string) error {
 	} else {
 		t.AddAll(source)
 	}
+
 	return nil
 }
 
@@ -168,6 +185,30 @@ func getIgnorePatterns(source string) ([]string, error) {
 	return patterns, nil
 }
 
+// get teresa.yaml configuration
+func getAppConfig(source string) (*TeresaYaml, error) {
+	teresaYamlPath := filepath.Join(source, "teresa.yaml")
+	if _, err := os.Stat(teresaYamlPath); err != nil {
+		if os.IsNotExist(err) {
+			return nil, nil
+		} else {
+			return nil, err
+		}
+	}
+
+	data, err := ioutil.ReadFile(teresaYamlPath)
+	if err != nil {
+		return nil, err
+	}
+
+	teresaYaml := new(TeresaYaml)
+	if err = yaml.Unmarshal(data, teresaYaml); err != nil {
+		return nil, err
+	}
+
+	return teresaYaml, nil
+}
+
 func addFiles(source string, tar tar.Writer, ignorePatterns []string) error {
 	return filepath.Walk(source, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
@@ -188,6 +229,70 @@ func addFiles(source string, tar tar.Writer, ignorePatterns []string) error {
 		filename := strings.Replace(path, fmt.Sprintf("%s/", source), "", 1)
 		return tar.AddFile(path, filename)
 	})
+}
+
+// create hook files
+func createHookFiles(source string) (hookFiles []string, err error) {
+	hookFiles = make([]string, 0, 3)
+	hooksPath := filepath.Join(source, "bin")
+
+	teresaYaml, err := getAppConfig(source)
+	if err != nil {
+		return
+	}
+	if teresaYaml == nil || teresaYaml.Hooks == nil {
+		return
+	}
+
+	if _, err = os.Stat(hooksPath); err != nil {
+		if os.IsNotExist(err) {
+			if err = os.Mkdir(hooksPath, 0755); err != nil {
+				return
+			}
+			hookFiles = append(hookFiles, hooksPath)
+		}
+	}
+	if teresaYaml.Hooks.Pre != nil && len(teresaYaml.Hooks.Pre) > 0 {
+		preCompileHook := filepath.Join(hooksPath, "pre-compile")
+		if err = writeHookFile(preCompileHook, teresaYaml.Hooks.Pre); err != nil {
+			return
+		}
+		hookFiles = append(hookFiles, preCompileHook)
+	}
+	if teresaYaml.Hooks.Post != nil && len(teresaYaml.Hooks.Post) > 0 {
+		postCompileHook := filepath.Join(hooksPath, "post-compile")
+		if err = writeHookFile(postCompileHook, teresaYaml.Hooks.Post); err != nil {
+			return
+		}
+		hookFiles = append(hookFiles, postCompileHook)
+	}
+	return
+}
+
+func cleanHookFiles(hookFiles []string) {
+	for i := len(hookFiles) - 1; i >= 0; i-- {
+		if f, _ := os.Stat(hookFiles[i]); f.IsDir() {
+			os.RemoveAll(hookFiles[i])
+		} else {
+			os.Remove(hookFiles[i])
+		}
+	}
+}
+
+func writeHookFile(fileName string, hooks []string) error {
+	f, err := os.OpenFile(fileName, os.O_CREATE|os.O_WRONLY, 0755)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	for _, s := range hooks {
+		if _, err := f.WriteString(fmt.Sprintf("%s\n", s)); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
 func init() {
