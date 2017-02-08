@@ -189,61 +189,6 @@ func (tc TeresaClient) DeleteUser(ID int64) error {
 	return err
 }
 
-// Me get's the user infos + teams + apps
-func (tc TeresaClient) Me() (user *models.User, err error) {
-	r, err := tc.teresa.Users.GetCurrentUser(nil, tc.apiKeyAuthFunc)
-	if err != nil {
-		return nil, err
-	}
-	return r.Payload, nil
-}
-
-// GetAppInfo return teamID and appID
-func (tc TeresaClient) GetAppInfoOld(teamName, appName string) (appInfo AppInfo) {
-	// me, err := tc.Me()
-	// if err != nil {
-	// 	log.Fatalf("unable to get user information: %s", err)
-	// }
-	// if len(me.Teams) > 1 && teamName == "" {
-	// 	log.Fatalln("User is in more than one team and provided none")
-	// }
-	// for _, t := range me.Teams {
-	// 	if teamName == "" || *t.Name == teamName {
-	// 		appInfo.TeamID = t.ID
-	// 		for _, a := range t.Apps {
-	// 			if *a.Name == appName {
-	// 				appInfo.AppID = a.ID
-	// 				break
-	// 			}
-	// 		}
-	// 		break
-	// 	}
-	// }
-	// if appInfo.TeamID == 0 || appInfo.AppID == 0 {
-	// 	log.Fatalf("Invalid Team [%s] or App [%s]\n", teamName, appName)
-	// }
-	return
-}
-
-// GetTeamID returns teamID from team_name
-func (tc TeresaClient) GetTeamID(teamName string) (teamID int64) {
-	me, err := tc.Me()
-	if err != nil {
-		log.Fatalf("unable to get user information: %s", err)
-	}
-	if len(me.Teams) > 1 && teamName == "" {
-		log.Fatalln("User is in more than one team and provided none")
-	}
-	for _, t := range me.Teams {
-		if teamName == "" || *t.Name == teamName {
-			return t.ID
-		}
-	}
-
-	log.Fatalf("Invalid Team [%s]\n", teamName)
-	return
-}
-
 // GetTeams returns a list with my teams
 func (tc TeresaClient) GetTeams() (teamsList []*models.Team, err error) {
 	params := teams.NewGetTeamsParams()
