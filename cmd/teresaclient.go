@@ -118,10 +118,8 @@ func (tc TeresaClient) DeleteTeam(ID int64) error {
 }
 
 // CreateApp creates an user
-func (tc TeresaClient) CreateApp(name string, scale int64, teamID int64) (app *models.App, err error) {
-	params := apps.NewCreateAppParams()
-	params.TeamID = teamID
-	params.WithBody(&models.App{Name: &name, Scale: &scale})
+func (tc TeresaClient) CreateApp(app models.AppIn) (*models.App, error) {
+	params := apps.NewCreateAppParams().WithBody(&app)
 	r, err := tc.teresa.Apps.CreateApp(params, tc.apiKeyAuthFunc)
 	if err != nil {
 		return nil, err
@@ -129,24 +127,46 @@ func (tc TeresaClient) CreateApp(name string, scale int64, teamID int64) (app *m
 	return r.Payload, nil
 }
 
-// GetApps return apps for a specific team
-func (tc TeresaClient) GetApps(teamID int64) (app []*models.App, err error) {
-	params := apps.NewGetAppsParams().WithTeamID(teamID)
-	r, err := tc.teresa.Apps.GetApps(params, tc.apiKeyAuthFunc)
-	if err != nil {
-		return nil, err
-	}
-	return r.Payload.Items, nil
-}
-
-// GetAppDetail Create app attributes
-func (tc TeresaClient) GetAppDetail(teamID, appID int64) (app *models.App, err error) {
-	params := apps.NewGetAppDetailsParams().WithTeamID(teamID).WithAppID(appID)
-	r, err := tc.teresa.Apps.GetAppDetails(params, tc.apiKeyAuthFunc)
+// GetApps return all apps for the token
+func (tc TeresaClient) GetApps() (appList []*models.App, err error) {
+	p := apps.NewGetAppsParams()
+	r, err := tc.teresa.Apps.GetApps(p, tc.apiKeyAuthFunc)
 	if err != nil {
 		return nil, err
 	}
 	return r.Payload, nil
+}
+
+// GetAppInfo returns all info about the app
+func (tc TeresaClient) GetAppInfo(appName string) (app *models.App, err error) {
+	p := apps.NewGetAppDetailsParams().WithAppName(appName)
+	r, err := tc.teresa.Apps.GetAppDetails(p, tc.apiKeyAuthFunc)
+	if err != nil {
+		return nil, err
+	}
+	return r.Payload, nil
+}
+
+func (tc TeresaClient) GetAppLogs(appName string, lines *int64, follow *bool, writer io.Writer) error {
+	p := apps.NewGetAppLogsParams().WithAppName(appName)
+	p.Follow = follow
+	p.Lines = lines
+	_, err := tc.teresa.Apps.GetAppLogs(p, tc.apiKeyAuthFunc, writer)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// GetAppDetail Create app attributes
+func (tc TeresaClient) GetAppDetail(teamID, appID int64) (app *models.App, err error) {
+	// params := apps.NewGetAppDetailsParams().WithTeamID(teamID).WithAppID(appID)
+	// r, err := tc.teresa.Apps.GetAppDetails(params, tc.apiKeyAuthFunc)
+	// if err != nil {
+	// 	return nil, err
+	// }
+	// return r.Payload, nil
+	return
 }
 
 // CreateUser Create an user
@@ -179,29 +199,29 @@ func (tc TeresaClient) Me() (user *models.User, err error) {
 }
 
 // GetAppInfo return teamID and appID
-func (tc TeresaClient) GetAppInfo(teamName, appName string) (appInfo AppInfo) {
-	me, err := tc.Me()
-	if err != nil {
-		log.Fatalf("unable to get user information: %s", err)
-	}
-	if len(me.Teams) > 1 && teamName == "" {
-		log.Fatalln("User is in more than one team and provided none")
-	}
-	for _, t := range me.Teams {
-		if teamName == "" || *t.Name == teamName {
-			appInfo.TeamID = t.ID
-			for _, a := range t.Apps {
-				if *a.Name == appName {
-					appInfo.AppID = a.ID
-					break
-				}
-			}
-			break
-		}
-	}
-	if appInfo.TeamID == 0 || appInfo.AppID == 0 {
-		log.Fatalf("Invalid Team [%s] or App [%s]\n", teamName, appName)
-	}
+func (tc TeresaClient) GetAppInfoOld(teamName, appName string) (appInfo AppInfo) {
+	// me, err := tc.Me()
+	// if err != nil {
+	// 	log.Fatalf("unable to get user information: %s", err)
+	// }
+	// if len(me.Teams) > 1 && teamName == "" {
+	// 	log.Fatalln("User is in more than one team and provided none")
+	// }
+	// for _, t := range me.Teams {
+	// 	if teamName == "" || *t.Name == teamName {
+	// 		appInfo.TeamID = t.ID
+	// 		for _, a := range t.Apps {
+	// 			if *a.Name == appName {
+	// 				appInfo.AppID = a.ID
+	// 				break
+	// 			}
+	// 		}
+	// 		break
+	// 	}
+	// }
+	// if appInfo.TeamID == 0 || appInfo.AppID == 0 {
+	// 	log.Fatalf("Invalid Team [%s] or App [%s]\n", teamName, appName)
+	// }
 	return
 }
 
@@ -231,45 +251,46 @@ func (tc TeresaClient) GetTeams() (teamsList []*models.Team, err error) {
 	if err != nil {
 		return nil, err
 	}
-	return r.Payload.Items, nil
+	return r.Payload, nil
 }
 
 // CreateDeploy creates a new deploy
-func (tc TeresaClient) CreateDeploy(teamID, appID int64, description string, tarBall *os.File, writer io.Writer) (io.Writer, error) {
+func (tc TeresaClient) CreateDeploy(appName, deployDescription string, tarBall *os.File, writer io.Writer) error {
 	p := deployments.NewCreateDeploymentParams()
-	p.TeamID = teamID
-	p.AppID = appID
-	p.Description = &description
+	p.AppName = appName
 	p.AppTarball = *tarBall
+	p.Description = &deployDescription
 
-	r, err := tc.teresa.Deployments.CreateDeployment(p, tc.apiKeyAuthFunc, writer)
+	_, err := tc.teresa.Deployments.CreateDeployment(p, tc.apiKeyAuthFunc, writer)
 	if err != nil {
-		return nil, err
+		return err
 	}
-	return r.Payload, err
+	return nil
 }
 
 // PartialUpdateApp partial updates app... for now, updates only envvars
-func (tc TeresaClient) PartialUpdateApp(teamID, appID int64, operations []*models.PatchAppRequest) error {
+func (tc TeresaClient) PartialUpdateApp(appName string, operations []*models.PatchAppRequest) (*models.App, error) {
 	p := apps.NewPartialUpdateAppParams()
-	p.TeamID = teamID
-	p.AppID = appID
+	p.AppName = appName
 	p.Body = operations
+	r, err := tc.teresa.Apps.PartialUpdateApp(p, tc.apiKeyAuthFunc)
+	if err != nil {
+		return nil, err
+	}
 
-	_, err := tc.teresa.Apps.PartialUpdateApp(p, tc.apiKeyAuthFunc)
-	return err
+	return r.Payload, nil
 }
 
 // AddUserToTeam adds a user (by email) to a team.
 // if the user is already part of the team, returns error
-func (tc TeresaClient) AddUserToTeam(team, userEmail string) *teams.AddUserToTeamDefault {
+func (tc TeresaClient) AddUserToTeam(teamName, userEmail string) (team *models.Team, err error) {
 	p := teams.NewAddUserToTeamParams()
-	p.TeamName = team
+	p.TeamName = teamName
 	email := strfmt.Email(userEmail)
 	p.User.Email = &email
-	_, err := tc.teresa.Teams.AddUserToTeam(p, tc.apiKeyAuthFunc)
+	r, err := tc.teresa.Teams.AddUserToTeam(p, tc.apiKeyAuthFunc)
 	if err != nil {
-		return err.(*teams.AddUserToTeamDefault)
+		return nil, err
 	}
-	return nil
+	return r.Payload, nil
 }

@@ -7,11 +7,6 @@
 	],
 	"Deps": [
 		{
-			"ImportPath": "github.com/BurntSushi/toml",
-			"Comment": "v0.2.0-9-gf0aeabc",
-			"Rev": "f0aeabca5a127c4078abb8c8d64298b147264b55"
-		},
-		{
 			"ImportPath": "github.com/PuerkitoBio/purell",
 			"Comment": "v1.0.0",
 			"Rev": "8a290539e2e8629dbc4e6bad948158f790ec31f4"
@@ -31,17 +26,9 @@
 			"Rev": "593d64559f7600f29581a3ee42177f5dbded27a9"
 		},
 		{
-			"ImportPath": "github.com/briandowns/spinner",
-			"Rev": "a00ac22c746220ee70a0891a0ec4aa6c56c6bb6a"
-		},
-		{
-			"ImportPath": "github.com/davecgh/go-spew/spew",
-			"Rev": "5215b55f46b2b919f50a1df0eaa5886afe4e3b3d"
-		},
-		{
 			"ImportPath": "github.com/fatih/color",
-			"Comment": "v0.2.0",
-			"Rev": "87d4004f2ab62d0d255e0a38f1680aa534549fe3"
+			"Comment": "v1.1.0-4-gbf82308",
+			"Rev": "bf82308e8c8546dc2b945157173eb8a959ae9505"
 		},
 		{
 			"ImportPath": "github.com/fsnotify/fsnotify",
@@ -141,39 +128,43 @@
 			"Rev": "333107c714224dd425951d488a51a03a42592fd8"
 		},
 		{
+			"ImportPath": "github.com/kr/fs",
+			"Rev": "2788f0dbd16903de03cb8186e5c7d97b69ad387b"
+		},
+		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client",
-			"Comment": "v0.1.1-29-g9f2f827",
-			"Rev": "9f2f827963d1b538d6f2cf818516a4e29d0ede30"
+			"Comment": "v0.1.1-86-g108b2c3",
+			"Rev": "108b2c37612f59ed2d834f35c414017b583afb91"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client/apps",
-			"Comment": "v0.1.1-29-g9f2f827",
-			"Rev": "9f2f827963d1b538d6f2cf818516a4e29d0ede30"
+			"Comment": "v0.1.1-86-g108b2c3",
+			"Rev": "108b2c37612f59ed2d834f35c414017b583afb91"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client/auth",
-			"Comment": "v0.1.1-29-g9f2f827",
-			"Rev": "9f2f827963d1b538d6f2cf818516a4e29d0ede30"
+			"Comment": "v0.1.1-86-g108b2c3",
+			"Rev": "108b2c37612f59ed2d834f35c414017b583afb91"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client/deployments",
-			"Comment": "v0.1.1-29-g9f2f827",
-			"Rev": "9f2f827963d1b538d6f2cf818516a4e29d0ede30"
+			"Comment": "v0.1.1-86-g108b2c3",
+			"Rev": "108b2c37612f59ed2d834f35c414017b583afb91"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client/teams",
-			"Comment": "v0.1.1-29-g9f2f827",
-			"Rev": "9f2f827963d1b538d6f2cf818516a4e29d0ede30"
+			"Comment": "v0.1.1-86-g108b2c3",
+			"Rev": "108b2c37612f59ed2d834f35c414017b583afb91"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client/users",
-			"Comment": "v0.1.1-29-g9f2f827",
-			"Rev": "9f2f827963d1b538d6f2cf818516a4e29d0ede30"
+			"Comment": "v0.1.1-86-g108b2c3",
+			"Rev": "108b2c37612f59ed2d834f35c414017b583afb91"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/models",
-			"Comment": "v0.1.1-29-g9f2f827",
-			"Rev": "9f2f827963d1b538d6f2cf818516a4e29d0ede30"
+			"Comment": "v0.1.1-86-g108b2c3",
+			"Rev": "108b2c37612f59ed2d834f35c414017b583afb91"
 		},
 		{
 			"ImportPath": "github.com/magiconair/properties",
@@ -194,12 +185,12 @@
 		},
 		{
 			"ImportPath": "github.com/mattn/go-colorable",
-			"Comment": "v0.0.5",
-			"Rev": "9056b7a9f2d1f2d96498d6d146acd1f9d5ed3d59"
+			"Comment": "v0.0.6-9-gd228849",
+			"Rev": "d228849504861217f796da67fae4f6e347643f15"
 		},
 		{
 			"ImportPath": "github.com/mattn/go-isatty",
-			"Rev": "56b76bdf51f7708750eac80fa38b952bb9f32639"
+			"Rev": "66b8e73f3f5cda9f96b69efd03dd3d7fc4a5cdb8"
 		},
 		{
 			"ImportPath": "github.com/mattn/go-runewidth",
@@ -219,21 +210,51 @@
 			"Rev": "daf2955e742cf123959884fdff4685aa79b63135"
 		},
 		{
+			"ImportPath": "github.com/pelletier/go-buffruneio",
+			"Rev": "df1e16fde7fc330a0ca68167c23bf7ed6ac31d6d"
+		},
+		{
+			"ImportPath": "github.com/pelletier/go-toml",
+			"Comment": "v0.3.5-16-g45932ad",
+			"Rev": "45932ad32dfdd20826f5671da37a5f3ce9f26a8d"
+		},
+		{
+			"ImportPath": "github.com/pkg/errors",
+			"Comment": "v0.8.0-1-g839d9e9",
+			"Rev": "839d9e913e063e28dfd0e6c7b7512793e0a48be9"
+		},
+		{
+			"ImportPath": "github.com/pkg/sftp",
+			"Rev": "4d0e916071f68db74f8a73926335f809396d6b42"
+		},
+		{
 			"ImportPath": "github.com/prometheus/common/log",
 			"Rev": "ebdfc6da46522d58825777cf1f90490a5b1ef1d8"
 		},
 		{
 			"ImportPath": "github.com/satori/go.uuid",
-			"Comment": "v1.1.0",
-			"Rev": "879c5887cd475cd7864858769793b2ceb0d44feb"
+			"Comment": "v1.1.0-1-g0aa62d5",
+			"Rev": "0aa62d5ddceb50dbcb909d790b5345affd3669b6"
+		},
+		{
+			"ImportPath": "github.com/spf13/afero",
+			"Rev": "52e4a6cfac46163658bd4f123c49b6ee7dc75f78"
+		},
+		{
+			"ImportPath": "github.com/spf13/afero/mem",
+			"Rev": "52e4a6cfac46163658bd4f123c49b6ee7dc75f78"
+		},
+		{
+			"ImportPath": "github.com/spf13/afero/sftp",
+			"Rev": "52e4a6cfac46163658bd4f123c49b6ee7dc75f78"
 		},
 		{
 			"ImportPath": "github.com/spf13/cast",
-			"Rev": "27b586b42e29bec072fe7379259cc719e1289da6"
+			"Rev": "2580bc98dc0e62908119e4737030cc2fdfc45e4c"
 		},
 		{
 			"ImportPath": "github.com/spf13/cobra",
-			"Rev": "6a8bd97bdb1fc0d08a83459940498ea49d3e8c93"
+			"Rev": "6e91dded25d73176bf7f60b40dd7aa1f0bf9be8d"
 		},
 		{
 			"ImportPath": "github.com/spf13/jwalterweatherman",
@@ -241,15 +262,31 @@
 		},
 		{
 			"ImportPath": "github.com/spf13/pflag",
-			"Rev": "367864438f1b1a3c7db4da06a2f55b144e6784e0"
+			"Rev": "5ccb023bc27df288a957c5e994cd44fd19619465"
 		},
 		{
 			"ImportPath": "github.com/spf13/viper",
-			"Rev": "c1ccc378a054ea8d4e38d8c67f6938d4760b53dd"
+			"Rev": "80ab6657f9ec7e5761f6603320d3d58dfe6970f6"
 		},
 		{
 			"ImportPath": "github.com/x-cray/logrus-prefixed-formatter",
 			"Rev": "19bfe61502ba35a3235b4970c10b9366a0aa9b61"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/curve25519",
+			"Rev": "f3241ce8505855877cc8a9717bd61a0f7c4ea83c"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/ed25519",
+			"Rev": "f3241ce8505855877cc8a9717bd61a0f7c4ea83c"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/ed25519/internal/edwards25519",
+			"Rev": "f3241ce8505855877cc8a9717bd61a0f7c4ea83c"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/ssh",
+			"Rev": "f3241ce8505855877cc8a9717bd61a0f7c4ea83c"
 		},
 		{
 			"ImportPath": "golang.org/x/crypto/ssh/terminal",
