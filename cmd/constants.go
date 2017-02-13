@@ -1,5 +1,7 @@
 package cmd
 
+import "os"
+
 // variables used to capture the cli flags
 var (
 	cfgFile            string
@@ -23,7 +25,8 @@ var (
 
 const (
 	version               = "0.1.3"
-	archiveTempFolder     = "/tmp"
 	deploymentSuccessMark = "----------deployment-success----------"
 	deploymentErrorMark   = "----------deployment-error----------"
 )
+
+var archiveTempFolder = os.TempDir()
