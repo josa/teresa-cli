@@ -100,7 +100,7 @@ func createTempArchiveToUpload(appName, source string) (path *string, err error)
 	if err != nil {
 		return nil, err
 	}
-	p := filepath.Join("/tmp", fmt.Sprintf("%s_%s.tar.gz", appName, id))
+	p := filepath.Join(os.TempDir(), fmt.Sprintf("%s_%s.tar.gz", appName, id))
 	if err = createArchive(source, p); err != nil {
 		return nil, err
 	}
