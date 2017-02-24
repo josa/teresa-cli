@@ -49,8 +49,7 @@ func ParseServerURL(s string) (TeresaServer, error) {
 	if u.Scheme == "" || u.Scheme != "http" && u.Scheme != "https" {
 		return TeresaServer{}, errors.New("accepted server url format: http(s)://hostname[:port]")
 	}
-	ts := TeresaServer{scheme: u.Scheme, host: u.Host}
-	return ts, nil
+	return TeresaServer{scheme: u.Scheme, host: u.Host}, nil
 }
 
 // NewTeresa foo bar
@@ -207,10 +206,7 @@ func (tc TeresaClient) CreateDeploy(appName, deployDescription string, tarBall *
 	p.Description = &deployDescription
 
 	_, err := tc.teresa.Deployments.CreateDeployment(p, tc.apiKeyAuthFunc, writer)
-	if err != nil {
-		return err
-	}
-	return nil
+	return err
 }
 
 // PartialUpdateApp partial updates app... for now, updates only envvars

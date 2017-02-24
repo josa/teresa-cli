@@ -63,7 +63,7 @@ func Execute() {
 
 		// Hack to print a invalid command for root
 		// Ex.: teresa notvalidcommand
-		if cmd.HasParent() == false {
+		if !cmd.HasParent() {
 			fmt.Println(err)
 			os.Exit(1)
 		}

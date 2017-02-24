@@ -42,12 +42,11 @@ var deployCmd = &cobra.Command{
 		// showing warning message to the user
 		fmt.Printf("Deploying app %s to the cluster %s...\n", color.CyanString(`"%s"`, appName), color.YellowString(`"%s"`, cluster))
 		noinput, _ := cmd.Flags().GetBool("no-input")
-		if noinput == false {
+		if !noinput {
 			fmt.Print("Are you sure? (yes/NO)? ")
 			// Waiting for the user answer...
 			s, _ := bufio.NewReader(os.Stdin).ReadString('\n')
-			s = strings.ToLower(strings.TrimRight(s, "\r\n"))
-			if s != "yes" {
+			if s = strings.ToLower(strings.TrimRight(s, "\r\n")); s != "yes" {
 				return nil
 			}
 		}
@@ -116,9 +115,10 @@ func createArchive(source, target string) error {
 		return errors.New("Path to create the app archive isn't a directory")
 	}
 	tar := new(archivex.TarFile)
+	defer tar.Close()
+
 	tar.Create(target)
 	tar.AddAll(source, false)
-	tar.Close()
 	return nil
 }
 
