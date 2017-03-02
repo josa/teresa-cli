@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 
 	"github.com/fatih/color"
@@ -114,12 +115,80 @@ func createArchive(source, target string) error {
 	} else if !dir.IsDir() {
 		return errors.New("Path to create the app archive isn't a directory")
 	}
+
+	ignorePatterns, err := getIgnorePatterns(source)
+	if err != nil {
+		return errors.New("Invalid file '.teresaignore'")
+	}
+
 	tar := new(archivex.TarFile)
 	defer tar.Close()
 
 	tar.Create(target)
-	tar.AddAll(source, false)
+	defer tar.Close()
+
+	if ignorePatterns != nil {
+		if err = addFiles(source, tar, ignorePatterns); err != nil {
+			return err
+		}
+	} else {
+		tar.AddAll(source, false)
+	}
 	return nil
+}
+
+func getIgnorePatterns(source string) ([]*regexp.Regexp, error) {
+	fPath := filepath.Join(source, ".teresaignore")
+	if _, err := os.Stat(fPath); err != nil {
+		if os.IsNotExist(err) {
+			return nil, nil
+		} else {
+			return nil, err
+		}
+	}
+
+	file, err := os.Open(fPath)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	patterns := make([]*regexp.Regexp, 0)
+	scanner := bufio.NewScanner(file)
+
+	for scanner.Scan() {
+		if text := scanner.Text(); text != "" {
+			patterns = append(patterns, regexp.MustCompile(text))
+		}
+	}
+
+	if len(patterns) == 0 {
+		return nil, nil
+	}
+
+	return patterns, nil
+}
+
+func addFiles(source string, tar *archivex.TarFile, ignorePatterns []*regexp.Regexp) error {
+	return filepath.Walk(source, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		for _, ip := range ignorePatterns {
+			if ip.MatchString(info.Name()) {
+				if info.IsDir() {
+					return filepath.SkipDir
+				}
+				return nil
+			}
+		}
+		if info.IsDir() {
+			return nil
+		}
+
+		filename := strings.Replace(path, fmt.Sprintf("%s/", source), "", 1)
+		return tar.AddFileWithName(path, filename)
+	})
 }
 
 func init() {
