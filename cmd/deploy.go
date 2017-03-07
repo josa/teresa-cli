@@ -10,7 +10,7 @@ import (
 	"strings"
 
 	"github.com/fatih/color"
-	"github.com/jhoonb/archivex"
+	"github.com/luizalabs/teresa-cli/tar"
 	"github.com/satori/go.uuid"
 	"github.com/spf13/cobra"
 )
@@ -121,18 +121,18 @@ func createArchive(source, target string) error {
 		return errors.New("Invalid file '.teresaignore'")
 	}
 
-	tar := new(archivex.TarFile)
-	defer tar.Close()
-
-	tar.Create(target)
-	defer tar.Close()
+	t, err := tar.New(target)
+	if err != nil {
+		return err
+	}
+	defer t.Close()
 
 	if ignorePatterns != nil {
-		if err = addFiles(source, tar, ignorePatterns); err != nil {
+		if err = addFiles(source, t, ignorePatterns); err != nil {
 			return err
 		}
 	} else {
-		tar.AddAll(source, false)
+		t.AddAll(source)
 	}
 	return nil
 }
@@ -169,7 +169,7 @@ func getIgnorePatterns(source string) ([]*regexp.Regexp, error) {
 	return patterns, nil
 }
 
-func addFiles(source string, tar *archivex.TarFile, ignorePatterns []*regexp.Regexp) error {
+func addFiles(source string, tar tar.Writer, ignorePatterns []*regexp.Regexp) error {
 	return filepath.Walk(source, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
@@ -187,7 +187,7 @@ func addFiles(source string, tar *archivex.TarFile, ignorePatterns []*regexp.Reg
 		}
 
 		filename := strings.Replace(path, fmt.Sprintf("%s/", source), "", 1)
-		return tar.AddFileWithName(path, filename)
+		return tar.AddFile(path, filename)
 	})
 }
 
