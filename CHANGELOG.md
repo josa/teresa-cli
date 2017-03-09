@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [NEXT_RELEASE]
 ### Changed
 - some code refactors
+- default client timeout to 30 minutes
 
 ## [0.2.0]
 ### Changed

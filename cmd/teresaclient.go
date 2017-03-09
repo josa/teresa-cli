@@ -40,6 +40,8 @@ type AppInfo struct {
 	TeamID int64
 }
 
+var defaultTimeout = 30 * time.Minute
+
 // ParseServerURL parse the server url and ensure its in the format we expect
 func ParseServerURL(s string) (TeresaServer, error) {
 	u, err := url.Parse(s)
@@ -73,7 +75,7 @@ func NewTeresa() TeresaClient {
 		log.Fatal(err)
 	}
 
-	client.DefaultTimeout = 5 * time.Minute // 5 minutes to wait deploy proccess
+	client.DefaultTimeout = defaultTimeout
 	c := client.New(ts.host, suffix, []string{ts.scheme})
 
 	tc.teresa.SetTransport(c)
