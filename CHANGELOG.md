@@ -2,9 +2,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-### [NEXT_RELEASE]
-### [### [NEXT_RELEASE]] - 2016-08-18
-#### Fixed
+## [NEXT_RELEASE]
+### Changed
+- some code refactors
+
+## [0.2.0]
+### Changed
+- big breaking changing version
+
+## [0.1.2] - 2016-08-18
+### Fixed
 - adding users to teams
 
 ## [0.1.1] - 2016-08-12
