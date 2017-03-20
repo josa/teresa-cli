@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"regexp"
 	"strings"
 
 	"github.com/fatih/color"
@@ -137,7 +136,7 @@ func createArchive(source, target string) error {
 	return nil
 }
 
-func getIgnorePatterns(source string) ([]*regexp.Regexp, error) {
+func getIgnorePatterns(source string) ([]string, error) {
 	fPath := filepath.Join(source, ".teresaignore")
 	if _, err := os.Stat(fPath); err != nil {
 		if os.IsNotExist(err) {
@@ -153,12 +152,12 @@ func getIgnorePatterns(source string) ([]*regexp.Regexp, error) {
 	}
 	defer file.Close()
 
-	patterns := make([]*regexp.Regexp, 0)
+	patterns := make([]string, 0)
 	scanner := bufio.NewScanner(file)
 
 	for scanner.Scan() {
 		if text := scanner.Text(); text != "" {
-			patterns = append(patterns, regexp.MustCompile(text))
+			patterns = append(patterns, text)
 		}
 	}
 
@@ -169,13 +168,13 @@ func getIgnorePatterns(source string) ([]*regexp.Regexp, error) {
 	return patterns, nil
 }
 
-func addFiles(source string, tar tar.Writer, ignorePatterns []*regexp.Regexp) error {
+func addFiles(source string, tar tar.Writer, ignorePatterns []string) error {
 	return filepath.Walk(source, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
 		for _, ip := range ignorePatterns {
-			if ip.MatchString(info.Name()) {
+			if matched, _ := filepath.Match(ip, info.Name()); matched {
 				if info.IsDir() {
 					return filepath.SkipDir
 				}
