@@ -6,6 +6,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - `.teresaignore` pattern type from regex to glob
 
+### Added
+- Support for custom process types
+
 ## [0.2.1] - 2017-03-14
 ### Added
 - read file `.teresaignore` to ignore some files in deploy process

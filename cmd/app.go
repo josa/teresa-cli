@@ -31,6 +31,9 @@ The app name must follow this rules:
   - something like: foo or foo-bar`,
 	Example: `  $ teresa app create foo --team bar
 
+  With specific process type:
+  $ teresa app create foo-worker --team bar --process-type worker
+
   With scale rules... min 2, max 10 pods, scalling with a cpu target of 70%
   $ teresa create foo --team bar --scale-min 2 --scale-max 10 --scale-cpu 70
 
@@ -52,6 +55,7 @@ The app name must follow this rules:
 		scaleMin, _ := cmd.Flags().GetInt64("scale-min")
 		cpu, _ := cmd.Flags().GetString("cpu")
 		memory, _ := cmd.Flags().GetString("memory")
+		processType, _ := cmd.Flags().GetString("process-type")
 		if team == "" {
 			return newUsageError("You should provide the name of the team to continue")
 		}
@@ -97,6 +101,9 @@ The app name must follow this rules:
 			CPUTargetUtilization: &targetCPU,
 			Min:                  scaleMin,
 			Max:                  scaleMax,
+		}
+		if processType != "" {
+			app.ProcessType = &processType
 		}
 
 		tc := NewTeresa()
@@ -443,6 +450,7 @@ func init() {
 	appCreateCmd.Flags().Int64("scale-cpu", 70, "auto scale target cpu percentage to scale")
 	appCreateCmd.Flags().String("cpu", "200m", "cpu size of the container")
 	appCreateCmd.Flags().String("memory", "512Mi", "cpu size of the container")
+	appCreateCmd.Flags().String("process-type", "", "app process type")
 	// App set env vars
 	appEnvSetCmd.Flags().String("app", "", "app name")
 	appEnvSetCmd.Flags().Bool("no-input", false, "set env vars without warning")

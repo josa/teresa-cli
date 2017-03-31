@@ -1,7 +1,7 @@
 {
 	"ImportPath": "github.com/luizalabs/teresa-cli",
 	"GoVersion": "go1.6",
-	"GodepVersion": "v62",
+	"GodepVersion": "v75",
 	"Packages": [
 		"./..."
 	],
@@ -133,38 +133,38 @@
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client",
-			"Comment": "v0.2.0-rc1-4-gcbadf25",
-			"Rev": "cbadf251b05aa2fa3d57c5d822f4c310775f8250"
+			"Comment": "0.3.0-rc-1-gce232ec",
+			"Rev": "ce232ec17c8dcf9db97d2acf47b2881f2fd53529"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client/apps",
-			"Comment": "v0.2.0-rc1-4-gcbadf25",
-			"Rev": "cbadf251b05aa2fa3d57c5d822f4c310775f8250"
+			"Comment": "0.3.0-rc-1-gce232ec",
+			"Rev": "ce232ec17c8dcf9db97d2acf47b2881f2fd53529"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client/auth",
-			"Comment": "v0.2.0-rc1-4-gcbadf25",
-			"Rev": "cbadf251b05aa2fa3d57c5d822f4c310775f8250"
+			"Comment": "0.3.0-rc-1-gce232ec",
+			"Rev": "ce232ec17c8dcf9db97d2acf47b2881f2fd53529"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client/deployments",
-			"Comment": "v0.2.0-rc1-4-gcbadf25",
-			"Rev": "cbadf251b05aa2fa3d57c5d822f4c310775f8250"
+			"Comment": "0.3.0-rc-1-gce232ec",
+			"Rev": "ce232ec17c8dcf9db97d2acf47b2881f2fd53529"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client/teams",
-			"Comment": "v0.2.0-rc1-4-gcbadf25",
-			"Rev": "cbadf251b05aa2fa3d57c5d822f4c310775f8250"
+			"Comment": "0.3.0-rc-1-gce232ec",
+			"Rev": "ce232ec17c8dcf9db97d2acf47b2881f2fd53529"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/client/users",
-			"Comment": "v0.2.0-rc1-4-gcbadf25",
-			"Rev": "cbadf251b05aa2fa3d57c5d822f4c310775f8250"
+			"Comment": "0.3.0-rc-1-gce232ec",
+			"Rev": "ce232ec17c8dcf9db97d2acf47b2881f2fd53529"
 		},
 		{
 			"ImportPath": "github.com/luizalabs/teresa-api/models",
-			"Comment": "v0.2.0-rc1-4-gcbadf25",
-			"Rev": "cbadf251b05aa2fa3d57c5d822f4c310775f8250"
+			"Comment": "0.3.0-rc-1-gce232ec",
+			"Rev": "ce232ec17c8dcf9db97d2acf47b2881f2fd53529"
 		},
 		{
 			"ImportPath": "github.com/magiconair/properties",
@@ -351,6 +351,6 @@
 		{
 			"ImportPath": "gopkg.in/yaml.v2",
 			"Rev": "e4d366fc3c7938e2958e662b4258c7a89e1f0e3e"
-		},
+		}
 	]
 }

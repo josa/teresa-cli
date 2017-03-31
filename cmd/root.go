@@ -69,7 +69,7 @@ func Execute() {
 		}
 
 		// writting errors to log for future troubleshooting
-		log.WithField("command", cmd.CommandPath()).WithError(err).Error("generic error")
+		log.WithField("command", cmd.CommandPath()).Error(err)
 
 		// from here below, try to print some usefull information for the user...
 		// check if the error is a net error
@@ -77,10 +77,6 @@ func Execute() {
 			fmt.Println("Faield to connect to server, or server is down!!!")
 			os.Exit(1)
 		}
-
-		fmt.Println("Something wrong happened... we collected all necessary data to fix and improve teresa")
-		// FIXME: put here the real log directory
-		fmt.Println("If you want more info, check logs in ...")
 		os.Exit(1)
 	}
 }
