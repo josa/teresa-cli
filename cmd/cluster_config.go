@@ -71,10 +71,7 @@ func setCluster(name string, server string, current bool, f string) error {
 	if current {
 		c.CurrentCluster = name
 	}
-	if err := writeConfigFile(f, c); err != nil {
-		return err
-	}
-	return nil
+	return writeConfigFile(f, c)
 }
 
 func setCurrentCluster(name string, f string) error {

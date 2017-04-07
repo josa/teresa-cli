@@ -82,7 +82,7 @@ func SetAuthToken(token string) (err error) {
 }
 
 // read the config file from disk
-func readConfigFile(f string) (c *configFile, err error) {
+func readConfigFile(f string) (*configFile, error) {
 	y, err := ioutil.ReadFile(f)
 	if err != nil {
 		if os.IsNotExist(err) {
@@ -90,20 +90,23 @@ func readConfigFile(f string) (c *configFile, err error) {
 		} else {
 			log.WithError(err).Error("Error loading the config file")
 		}
-		return
+		return nil, err
 	}
-	conf := configFile{}
-	if err = yaml.Unmarshal(y, &conf); err != nil {
+	conf := new(configFile)
+	if err = yaml.Unmarshal(y, conf); err != nil {
 		log.WithError(err).WithField("cfgFile", f).Error("Error trying to unmarshal the config file")
 		return nil, err
 	}
-	return &conf, nil
+	if conf.Clusters == nil {
+		conf.Clusters = make(map[string]clusterConfig)
+	}
+	return conf, nil
 }
 
 // return the config file loaded from disk or creates a new one (empty with the base needs)
-func readOrCreateConfigFile(f string) (c *configFile, err error) {
-	if c, err = readConfigFile(cfgFile); err == nil || !os.IsNotExist(err) {
-		return
+func readOrCreateConfigFile(f string) (*configFile, error) {
+	if c, err := readConfigFile(cfgFile); err == nil || !os.IsNotExist(err) {
+		return c, err
 	}
 
 	// set defaults

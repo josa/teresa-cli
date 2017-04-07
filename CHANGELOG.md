@@ -2,7 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [NEXT_RELEASE] ## [0.3.0] - 2017-04-07
+## [NEXT_RELEASE]
+### Fixed
+- panic error when configuring cluster ([#47](https://github.com/luizalabs/teresa-cli/issues/47))
+
+## [0.3.0] - 2017-04-07
 ### Changed
 - `.teresaignore` pattern type from regex to glob
 
