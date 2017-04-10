@@ -22,7 +22,7 @@ var (
 )
 
 const (
-	version               = "v0.3.0"
+	version               = "v0.3.1"
 	deploymentSuccessMark = "----------deployment-success----------"
 	deploymentErrorMark   = "----------deployment-error----------"
 )
