@@ -35,13 +35,13 @@ The app name must follow this rules:
   $ teresa app create foo-worker --team bar --process-type worker
 
   With scale rules... min 2, max 10 pods, scalling with a cpu target of 70%
-  $ teresa create foo --team bar --scale-min 2 --scale-max 10 --scale-cpu 70
+  $ teresa app create foo --team bar --scale-min 2 --scale-max 10 --scale-cpu 70
 
   With specific cpu and memory size...
-  $ teresa create foo --team bar --cpu 400m --memory 1Gi
+  $ teresa create foo --team bar --cpu 200m --max-cpu 1Gi --memory 512Mi --max-memory 1Gi
 
   With all flags...
-  $ teresa app create foo --team bar --cpu 400m --memory 1Gi --scale-min 2 --scale-max 10 --scale-cpu 70`,
+  $ teresa app create foo --team bar --cpu 200m --max-cpu 500m --memory 512Mi --max-memory 1Gi --scale-min 2 --scale-max 10 --scale-cpu 70 --process-type web`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		// Getting app name
 		if len(args) != 1 {
@@ -55,6 +55,8 @@ The app name must follow this rules:
 		scaleMin, _ := cmd.Flags().GetInt64("scale-min")
 		cpu, _ := cmd.Flags().GetString("cpu")
 		memory, _ := cmd.Flags().GetString("memory")
+		maxCpu, _ := cmd.Flags().GetString("max-cpu")
+		maxMemory, _ := cmd.Flags().GetString("max-memory")
 		processType, _ := cmd.Flags().GetString("process-type")
 		if team == "" {
 			return newUsageError("You should provide the name of the team to continue")
@@ -78,11 +80,11 @@ The app name must follow this rules:
 			Default: []*models.LimitRangeQuantity{
 				&models.LimitRangeQuantity{
 					Resource: &cpuString,
-					Quantity: &cpu,
+					Quantity: &maxCpu,
 				},
 				&models.LimitRangeQuantity{
 					Resource: &memString,
-					Quantity: &memory,
+					Quantity: &maxMemory,
 				},
 			},
 			DefaultRequest: []*models.LimitRangeQuantity{
@@ -449,7 +451,9 @@ func init() {
 	appCreateCmd.Flags().Int64("scale-max", 2, "auto scale max size")
 	appCreateCmd.Flags().Int64("scale-cpu", 70, "auto scale target cpu percentage to scale")
 	appCreateCmd.Flags().String("cpu", "200m", "cpu size of the container")
-	appCreateCmd.Flags().String("memory", "512Mi", "cpu size of the container")
+	appCreateCmd.Flags().String("memory", "512Mi", "memory size of the container")
+	appCreateCmd.Flags().String("max-cpu", "500m", "max cpu size of the container")
+	appCreateCmd.Flags().String("max-memory", "512Mi", "max memory size of the container")
 	appCreateCmd.Flags().String("process-type", "", "app process type")
 	// App set env vars
 	appEnvSetCmd.Flags().String("app", "", "app name")
