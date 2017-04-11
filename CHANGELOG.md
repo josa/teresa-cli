@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [NEXT_RELEASE]
 ### Added
-- flags `max-cpu` and `max-memory` in `app create` command to define limits `default` of application
+- flags `max-cpu` and `max-memory` in `app create` command to define the `default` limits of the application
 (the flags `cpu` and `memory` still define `default requested` quota)
 
 ## [0.3.1] - 2017-04-10
