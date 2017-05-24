@@ -20,7 +20,25 @@ Create a new team (optional, requires admin privileges):
     $ teresa team create myteam
     $ teresa team add-user --team myteam --user myuser@mydomain.com
 
-Finally create and deploy the application:
+Create web app:
 
     $ teresa app create myapp --team myteam
+
+Create worker app:
+
+    $ teresa app create myapp --team myteam --process-type worker
+    
+Create the [Procfile](https://devcenter.heroku.com/articles/procfile#procfile-naming-and-location) (optional)
+
+    $ cat ./Procfile
+    web: app.sh
+
+Finally deploy the application
+
     $ teresa deploy /path/to/myapp --app myapp --description "release 1.0"
+
+For further questions, read the help
+
+    $ teresa -h
+
+    $ teresa [command] --help
